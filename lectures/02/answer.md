@@ -2,14 +2,26 @@
 
 ## 演習
 
-- 使ったモデル・設定（`result.json` の `config` から）：
-- 自分で学習を実行したか（`executed_training_myself`）：はい / いいえ（実行できた範囲：　）
-- 学習前：`format_rate` =　 / `content_rate` =　
-- 学習後：`format_rate` =　 / `content_rate` =　
-- 退行した質問：
-- 学習後に残った失敗と、その型（根拠なしの質問に断定した / 根拠ありの質問に確認要求で逃げた / 形式の崩れ）：
-- 知識を問う質問（セクション 6）の結果（学習前の分類 → 学習後の分類）と気づいたこと：
-- 学習で変わったこと・変わらなかったこと：
+- 使ったモデル・設定（`result.json` の `config` から）："base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+- 自分で学習を実行したか（`executed_training_myself`）：はい （実行できた範囲：　）
+- 学習前：`format_rate` = 0.09523809523809523　 / `content_rate` =　0.0
+- 学習後：`format_rate` = 1.0 / `content_rate` =　0.8571428571428571
+- 退行した質問： なし
+- 学習後に残った失敗と、その型（根拠なしの質問に断定した / 根拠ありの質問に確認要求で逃げた / 形式の崩れ）：No.15,17,20の3つ。型は「根拠なしの質問に断定した」
+- 知識を問う質問（セクション 6）の結果（学習前の分類 → 学習後の分類）と気づいたこと：1.format_error→asserted　2.format_error→needs_review 3.format_error→needs_review 4.ormat_error→asserted　気づいたこと：学習前はformat_errorが大部分を占めた。一方、学習後はasserted（根拠のない断定）とneeds_review の両方が出る。わずかな学習によって結果は大きく変化したように感じる。
+- 学習で変わったこと・変わらなかったこと：学習で変わったことは、format_errorがなくなったこと。変わらなかったことは、根拠のない断定がなくならなかったこと。
 
 ## 宿題
 
